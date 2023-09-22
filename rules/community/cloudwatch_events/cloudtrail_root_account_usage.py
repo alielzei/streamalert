@@ -6,7 +6,9 @@ from streamalert.shared.rule import rule
     logs=['cloudwatch:events'],
     req_subkeys={
         'detail': ['userIdentity', 'eventType']
-    })
+    },
+    outputs=['aws-sns:test-email']  # Add this line
+)
 def cloudtrail_root_account_usage(rec):
     """
     author:           airbnb_csirt

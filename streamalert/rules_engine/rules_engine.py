@@ -46,15 +46,24 @@ class RulesEngine:
     _alert_forwarder = None
 
     def __init__(self, *rule_paths):
+        LOGGER.debug('[LOAD CONFIG START]')
         RulesEngine._config = RulesEngine._config or load_config()
+        LOGGER.debug('[LOAD CONFIG END]')
+
         RulesEngine._threat_intel = (
             RulesEngine._threat_intel or ThreatIntel.load_from_config(self.config)
         )
         # Instantiate the alert forwarder to handle sending alerts to the alert processor
+        LOGGER.debug('[INSTANTIATING A DYNAMODB ALERTS TABLE START]')
         RulesEngine._alert_forwarder = RulesEngine._alert_forwarder or AlertForwarder()
+        LOGGER.debug('[INSTANTIATING A DYNAMODB ALERTS TABLE END]')
+
 
         # Load the lookup tables
+        # takes time on coldstart 
+        LOGGER.debug('[LOOKUP TABLES LOADING START]')
         RulesEngine._lookup_tables = LookupTables.get_instance(config=self.config)
+        LOGGER.debug('[LOOKUP TABLES LOADING END]')
 
         # If no rule import paths are specified, default to the config
         rule_paths = rule_paths or [
@@ -62,7 +71,11 @@ class RulesEngine:
             for item in self.config['global']['general'][location]
         ]
 
+        # PLAN A 0.
+        # remove this, rules will stay empty
+        LOGGER.debug('[IMPORT FOLDERS FROM IO PROBABLY START]')
         import_folders(*rule_paths)
+        LOGGER.debug('[IMPORT FOLDERS FROM IO PROBABLY END]')
 
         self._rule_stat_tracker = RuleStatisticTracker(
             'STREAMALERT_TRACK_RULE_STATS' in env,
@@ -482,6 +495,9 @@ class RulesEngine:
 
         alerts = []
         for payload in records:
+            # PLAN A 2. 
+            # import_folders(payload['rule_location'])
+
             rules = Rule.rules_for_log_type(payload['log_schema_type'])
             if not rules:
                 LOGGER.debug('No rules to process for %s', payload)

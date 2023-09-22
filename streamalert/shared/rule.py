@@ -48,6 +48,7 @@ class Rule:
     DEFAULT_RULE_DESCRIPTION = 'No rule description provided'
     CHECKSUM_UNKNOWN = 'checksum unknown'
 
+    # static rule dict that is populated on every Rule() called by the decorator when it is imported using importlib - ali
     _rules = {}
 
     def __init__(self, func, **kwargs):

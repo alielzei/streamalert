@@ -1,0 +1,66 @@
+{
+    "jsonski:bestbuysmall": {
+        "schema": {
+            "name": "string",
+            "id": "string"
+        },
+        "parser": "json",
+        "configuration": {
+            "json_path": "categoryPath[0]",
+            "optional_top_level_keys": [
+                "name",
+                "id"
+            ]
+        }
+    },
+    "jsonski:bestbuylarge": {
+        "schema": {
+            "name": "string",
+            "id": "string"
+        },
+        "parser": "json",
+        "configuration": {
+            "json_path": "products[*].categoryPath[*]",
+            "optional_top_level_keys": [
+                "name",
+                "id"
+            ]
+        }
+    },
+    "jsonski:twittersmall": {
+        "schema": {
+            "url": "string",
+            "expanded_url": "string",
+            "display_url": "string",
+            "indices": []
+        },
+        "parser": "json",
+        "configuration": {
+            "json_path": "entities.urls[*]"
+        },
+        "optional_top_level_keys": [
+            "url",
+            "expanded_url",
+            "display_url",
+            "indices"
+        ]
+    },
+    "jsonski:twitterlarge": {
+        "schema": {
+            "url": "string",
+            "expanded_url": "string",
+            "display_url": "string",
+            "indices": []
+        },
+        "parser": "json",
+        "configuration": {
+            "json_path": "[*].entities.urls[*]"
+        },
+        "optional_top_level_keys": [
+            "url",
+            "expanded_url",
+            "display_url",
+            "indices"
+        ]
+    }
+}

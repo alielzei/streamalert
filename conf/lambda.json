@@ -1,6 +1,5 @@
 {
   "alert_merger_config": {
-    "concurrency_limit": 1,
     "enable_custom_metrics": true,
     "log_level": "info",
     "log_retention_days": 14,
@@ -51,7 +50,6 @@
     }
   },
   "athena_partitioner_config": {
-    "concurrency_limit": 10,
     "memory": 128,
     "timeout": 300,
     "file_format": "parquet",
@@ -82,9 +80,8 @@
     "timeout": 120
   },
   "rules_engine_config": {
-    "concurrency_limit": 10,
     "enable_custom_metrics": true,
-    "log_level": "info",
+    "log_level": "debug",
     "log_retention_days": 14,
     "log_rule_statistics": true,
     "memory": 128,

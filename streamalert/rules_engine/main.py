@@ -14,23 +14,41 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+print("first python line of code (not using the logger cuz library isnt loaded)")
+
 import json
 
 from streamalert.rules_engine import RulesEngine
 from streamalert.shared import logger
 
+from codeguru_profiler_agent import with_lambda_profiler
 
+print("loaded some libraries")
+
+LOGGER = logger.get_logger(__name__)
+
+@with_lambda_profiler(profiling_group_name="streamalert-ali")
 def handler(event, _):
     """Main Lambda handler function"""
     try:
         records = []
         for record in event.get('Records', []):
+            LOGGER.debug('[JSON LOADS START]')
             body = json.loads(record['body'])
+            LOGGER.debug('[JSON LOADS END]')
             if isinstance(body, list):
                 records.extend(body)
             else:
                 records.append(body)
-        RulesEngine().run(records)
+        
+        LOGGER.debug('[INIT RULES_ENGINE START]')
+        rules_engine = RulesEngine()
+        LOGGER.debug('[INIT RULES_ENGINE END]')
+        
+        LOGGER.debug('[RULES_ENGINE RUN START]')
+        rules_engine.run(records)
+        LOGGER.debug('[RULES_ENGINE RUN END]')
+
     except Exception:
         logger.get_logger(__name__).exception('Invocation event: %s', json.dumps(event))
         raise

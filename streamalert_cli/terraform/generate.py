@@ -98,7 +98,7 @@ def generate_s3_bucket(bucket, logging, **kwargs):
 
     s3_bucket = {
         'bucket': bucket,
-        'acl': kwargs.get('acl', 'private'),
+        # 'acl': kwargs.get('acl', 'private'),
         'force_destroy': kwargs.get('force_destroy', True),
         'versioning': {
             'enabled': kwargs.get('versioning', True)
@@ -186,7 +186,7 @@ def generate_main(config, init=False):
             'region': config['global']['account']['region'],
             'encrypt': True,
             'dynamodb_table': state_lock_table_name,
-            'acl': 'private',
+            # 'acl': 'private',
             'kms_key_id': 'alias/{}'.format(
                 config['global']['account'].get(
                     'kms_key_alias',

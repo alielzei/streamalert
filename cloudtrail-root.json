@@ -1,0 +1,16 @@
+{
+  "account": "1234",
+  "detail": {
+    "eventType": "AwsConsoleSignIn",
+    "userIdentity": {
+      "type": "Root"
+    }
+  },
+  "detail-type": "CloudTrail Test",
+  "id": "1234",
+  "region": "us-east-1",
+  "resources": [],
+  "source": "1.1.1.2",
+  "time": "now",
+  "version": "2018"
+}
