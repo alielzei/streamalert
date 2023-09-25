@@ -41,6 +41,7 @@ class PayloadRecord:
     def __init__(self, record_data):
         self._record_data = record_data
         self._parser = None
+        self._rule_filename = None
         self.service = None
         self.resource = None
 
@@ -108,6 +109,14 @@ class PayloadRecord:
         self._parser = parser
 
     @property
+    def rule_filename(self):
+        return self._rule_filename
+
+    @rule_filename.setter
+    def rule_filename(self, rule_filename):
+        self._rule_filename = rule_filename
+
+    @property
     def parsed_records(self):
         return self.parser.parsed_records if self else []
 
@@ -142,6 +151,7 @@ class PayloadRecord:
                 'service': self.service,
                 'resource': self.resource,
                 'data_type': self.data_type,
+                'rule_filename': self.rule_filename,
             } for record in self.parsed_records
         ]
 

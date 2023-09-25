@@ -14,11 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-print("importing some libraries importer.py START")
 import importlib
 import os
-print("importing some libraries importer.py END")
 
+def import_rule_file(path):
+    importlib.import_module(_path_to_module(path))
 
 def import_folders(*paths):
     """Dynamically import all rules files.

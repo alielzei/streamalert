@@ -143,6 +143,9 @@ class Classifier:
 
             # Set the parser on successful parse
             payload_record.parser = parser
+            # PLAN A 0.
+            # add this line below
+            payload_record.rule_filename = options['rule_filename']
 
             return True
 
@@ -169,6 +172,8 @@ class Classifier:
             self._processed_size += len(record)
 
             # Get the parser for this data
+            # ali: log_schema_type is here
+            # now the record 
             self._process_log_schemas(record, logs_config)
 
             LOGGER.debug('Parsed and classified payload: %s', bool(record))

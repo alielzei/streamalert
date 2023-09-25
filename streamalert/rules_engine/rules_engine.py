@@ -22,7 +22,8 @@ from streamalert.rules_engine.threat_intel import ThreatIntel
 from streamalert.shared import resources, RULES_ENGINE_FUNCTION_NAME as FUNCTION_NAME
 from streamalert.shared.alert import Alert
 from streamalert.shared.config import load_config
-from streamalert.shared.importer import import_folders
+# from streamalert.shared.importer import import_folders
+from streamalert.shared.importer import import_rule_file
 from streamalert.shared.logger import get_logger
 from streamalert.shared.lookup_tables.core import LookupTables
 from streamalert.shared.metrics import MetricLogger
@@ -73,9 +74,9 @@ class RulesEngine:
 
         # PLAN A 0.
         # remove this, rules will stay empty
-        LOGGER.debug('[IMPORT FOLDERS FROM IO PROBABLY START]')
-        import_folders(*rule_paths)
-        LOGGER.debug('[IMPORT FOLDERS FROM IO PROBABLY END]')
+        # LOGGER.debug('[IMPORT FOLDERS FROM IO PROBABLY START]')
+        # import_folders(*rule_paths)
+        # LOGGER.debug('[IMPORT FOLDERS FROM IO PROBABLY END]')
 
         self._rule_stat_tracker = RuleStatisticTracker(
             'STREAMALERT_TRACK_RULE_STATS' in env,
@@ -496,7 +497,8 @@ class RulesEngine:
         alerts = []
         for payload in records:
             # PLAN A 2. 
-            # import_folders(payload['rule_location'])
+            if 'rule_filename' in payload:
+                import_rule_file(payload['rule_filename'])
 
             rules = Rule.rules_for_log_type(payload['log_schema_type'])
             if not rules:

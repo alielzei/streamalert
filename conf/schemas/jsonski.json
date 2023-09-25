@@ -5,6 +5,7 @@
             "id": "string"
         },
         "parser": "json",
+        "rule_filename": "rules/community/jsonski/jsonski_bestbuy_small.py",
         "configuration": {
             "json_path": "categoryPath[0]",
             "optional_top_level_keys": [
@@ -19,6 +20,7 @@
             "id": "string"
         },
         "parser": "json",
+        "rule_filename": "rules/community/jsonski/jsonski_bestbuy_large.py",
         "configuration": {
             "json_path": "products[*].categoryPath[*]",
             "optional_top_level_keys": [
@@ -35,6 +37,7 @@
             "indices": []
         },
         "parser": "json",
+        "rule_filename": "rules/community/jsonski/jsonski_twitter_small.py",
         "configuration": {
             "json_path": "entities.urls[*]"
         },
@@ -53,6 +56,7 @@
             "indices": []
         },
         "parser": "json",
+        "rule_filename": "rules/community/jsonski/jsonski_twitter_large.py",
         "configuration": {
             "json_path": "[*].entities.urls[*]"
         },

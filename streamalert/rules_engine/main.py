@@ -14,16 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-print("first python line of code (not using the logger cuz library isnt loaded)")
-
 import json
 
 from streamalert.rules_engine import RulesEngine
 from streamalert.shared import logger
 
 from codeguru_profiler_agent import with_lambda_profiler
-
-print("loaded some libraries")
 
 LOGGER = logger.get_logger(__name__)
 
