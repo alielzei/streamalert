@@ -17,8 +17,12 @@ limitations under the License.
 import importlib
 import os
 
-def import_rule_file(path):
-    importlib.import_module(_path_to_module(path))
+def import_rule_file(paths_string):
+    if not isinstance(paths_string, str):
+        return 
+        
+    for path in paths_string.split(","):
+        importlib.import_module(_path_to_module(path))
 
 def import_folders(*paths):
     """Dynamically import all rules files.

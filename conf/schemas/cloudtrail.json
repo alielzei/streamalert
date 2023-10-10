@@ -52,6 +52,7 @@
       "vpcEndpointId": "string"
     },
     "parser": "json",
+    "rule_filename": "rules/community/cloudtrail/cloudtrail_aws_config.py,rules/community/cloudwatch_events/cloudtrail_critical_api_calls.py,rules/community/cloudwatch_events/cloudtrail_ec2_image_creation.py,rules/community/cloudwatch_events/cloudtrail_mfa_policy_abuse_attempt.py,rules/community/cloudwatch_events/cloudtrail_network_acl_ingress_anywhere.py,rules/community/cloudwatch_events/cloudtrail_public_resources.py,rules/community/cloudwatch_events/cloudtrail_put_bucket_acl.py,rules/community/cloudwatch_events/cloudtrail_put_object_acl_public_publisher_example.py,rules/community/cloudwatch_events/cloudtrail_put_object_acl_public.py,rules/community/cloudwatch_events/cloudtrail_root_account_usage.py,rules/community/cloudwatch_events/cloudtrail_security_group_ingress_anywhere.py,rules/community/cloudwatch_events/cloudtrail_snapshot_or_ami_made_public.py,rules/community/guardduty/guard_duty_all.py",
     "configuration": {
       "json_path": "Records[*]",
       "optional_top_level_keys": [

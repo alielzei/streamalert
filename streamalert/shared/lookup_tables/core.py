@@ -31,22 +31,12 @@ class LookupTables:
             LookupTablesCore
         """
         if not cls._instance or reset:
-            LOGGER.debug('[IF CONDITION because cls._instance=%s and reset=%s]', cls._instance, reset)
             if config is None:
-                LOGGER.debug('[LOAD CONFIG START]')
                 config = load_config()
-                LOGGER.debug('[LOAD CONFIG END]')
 
-            LOGGER.debug('[LOOKUP TABLES CORE CONFIG START]')
             cls._instance = LookupTablesCore(config)
-            LOGGER.debug('[LOOKUP TABLES CORE CONFIG END]')
 
-            LOGGER.debug('[LOOKUP TABLES SETUP TABLES CONFIG START]')
             cls._instance.setup_tables()
-            LOGGER.debug('[LOOKUP TABLES SETUP TABLES CONFIG END]')
-
-        else:
-            LOGGER.debug('[ELSE CONDITION because cls._instance=%s and reset=%s]', cls._instance, reset)
 
         return cls._instance
 

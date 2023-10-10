@@ -19,9 +19,9 @@ import json
 from streamalert.classifier import Classifier
 from streamalert.shared import logger
 
-# from codeguru_profiler_agent import with_lambda_profiler
+from codeguru_profiler_agent import with_lambda_profiler
 
-# @with_lambda_profiler(profiling_group_name="streamalert-ali")
+@with_lambda_profiler(profiling_group_name="streamalert-ali")
 def handler(event, _):
     """Main Lambda handler function"""
     try:

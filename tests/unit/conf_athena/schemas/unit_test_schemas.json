@@ -4,7 +4,7 @@
       "nested_key_01": "string",
       "nested_key_02": "string"
     },
-    "parser": "json",
+    "parser": "json", "rule_filename": ""
     "configuration": {
       "embedded_json": true,
       "envelope_keys": {

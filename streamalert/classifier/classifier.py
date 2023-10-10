@@ -143,9 +143,11 @@ class Classifier:
 
             # Set the parser on successful parse
             payload_record.parser = parser
-            # PLAN A 0.
-            # add this line below
-            payload_record.rule_filename = options['rule_filename']
+            # adding this below - ali
+            try:
+                payload_record.rule_filename = options['rule_filename']
+            except KeyError:
+                pass
 
             return True
 

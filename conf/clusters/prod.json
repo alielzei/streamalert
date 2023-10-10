@@ -33,19 +33,25 @@
   "data_sources": {
     "sns": {
       "streamalert-test-data": [
+        "cloudtrail",
         "cloudwatch"
       ]
     },
     "s3": {
       "jsonski-logs": [
         "jsonski"
+      ],
+      "flaws-cloudtrail-logs2": [
+        "cloudtrail",
+        "cloudwatch"
       ]
     }
   },
   "enable_threat_intel": false,
   "modules": {
     "s3_events": {
-      "jsonski-logs": []
+      "jsonski-logs": [],
+      "flaws-cloudtrail-logs2": []
     }
   }
 }

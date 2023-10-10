@@ -22,8 +22,8 @@ from streamalert.rules_engine.threat_intel import ThreatIntel
 from streamalert.shared import resources, RULES_ENGINE_FUNCTION_NAME as FUNCTION_NAME
 from streamalert.shared.alert import Alert
 from streamalert.shared.config import load_config
-# from streamalert.shared.importer import import_folders
-from streamalert.shared.importer import import_rule_file
+from streamalert.shared.importer import import_folders
+# from streamalert.shared.importer import import_rule_file
 from streamalert.shared.logger import get_logger
 from streamalert.shared.lookup_tables.core import LookupTables
 from streamalert.shared.metrics import MetricLogger
@@ -47,17 +47,17 @@ class RulesEngine:
     _alert_forwarder = None
 
     def __init__(self, *rule_paths):
-        LOGGER.debug('[LOAD CONFIG START]')
+        LOGGER.debug('[LOAD CONFIG START]') # ali-log
         RulesEngine._config = RulesEngine._config or load_config()
-        LOGGER.debug('[LOAD CONFIG END]')
+        LOGGER.debug('[LOAD CONFIG END]') # ali-log
 
         RulesEngine._threat_intel = (
             RulesEngine._threat_intel or ThreatIntel.load_from_config(self.config)
         )
         # Instantiate the alert forwarder to handle sending alerts to the alert processor
-        LOGGER.debug('[INSTANTIATING A DYNAMODB ALERTS TABLE START]')
+        LOGGER.debug('[INSTANTIATING A DYNAMODB ALERTS TABLE START]') # ali-log
         RulesEngine._alert_forwarder = RulesEngine._alert_forwarder or AlertForwarder()
-        LOGGER.debug('[INSTANTIATING A DYNAMODB ALERTS TABLE END]')
+        LOGGER.debug('[INSTANTIATING A DYNAMODB ALERTS TABLE END]') # ali-log
 
 
         # Load the lookup tables
@@ -74,9 +74,9 @@ class RulesEngine:
 
         # PLAN A 0.
         # remove this, rules will stay empty
-        # LOGGER.debug('[IMPORT FOLDERS FROM IO PROBABLY START]')
-        # import_folders(*rule_paths)
-        # LOGGER.debug('[IMPORT FOLDERS FROM IO PROBABLY END]')
+        LOGGER.debug('[IMPORT FOLDERS FROM IO START]') # ali-log
+        import_folders(*rule_paths)
+        LOGGER.debug('[IMPORT FOLDERS FROM IO END]') # ali-log
 
         self._rule_stat_tracker = RuleStatisticTracker(
             'STREAMALERT_TRACK_RULE_STATS' in env,
@@ -497,8 +497,7 @@ class RulesEngine:
         alerts = []
         for payload in records:
             # PLAN A 2. 
-            if 'rule_filename' in payload:
-                import_rule_file(payload['rule_filename'])
+            # import_rule_file(payload['rule_filename'])
 
             rules = Rule.rules_for_log_type(payload['log_schema_type'])
             if not rules:
