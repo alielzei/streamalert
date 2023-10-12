@@ -13,7 +13,7 @@ _PUBLIC_BUCKETS = {'example-bucket-to-ignore'}
 
 
 @rule(
-    logs=['cloudwatch:events'],
+    logs=['cloudtrail:events'],
     req_subkeys={
         'detail': ['requestParameters']
     })

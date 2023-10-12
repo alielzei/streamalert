@@ -8,7 +8,7 @@ _DENIED_ACLS = {
 
 
 @rule(
-    logs=['cloudwatch:events'],
+    logs=['cloudtrail:events'],
     req_subkeys={
         'detail': ['requestParameters', 'eventName']
     })

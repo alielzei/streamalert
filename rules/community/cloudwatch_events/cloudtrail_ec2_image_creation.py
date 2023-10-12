@@ -3,7 +3,7 @@ from streamalert.shared.rule import rule
 
 
 @rule(
-    logs=['cloudwatch:events'],
+    logs=['cloudtrail:events'],
     req_subkeys={'detail': ['requestParameters', 'eventName']})
 def unencrypted_ami_volume(rec):
     """
@@ -35,7 +35,7 @@ def unencrypted_ami_volume(rec):
 
 
 @rule(
-    logs=['cloudwatch:events'],
+    logs=['cloudtrail:events'],
     req_subkeys={'detail': ['requestParameters', 'eventName']})
 def public_ami(rec):
     """

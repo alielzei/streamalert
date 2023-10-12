@@ -3,7 +3,7 @@ from streamalert.shared.rule import rule
 
 
 @rule(
-    logs=['cloudwatch:events'],
+    logs=['cloudtrail:events'],
     req_subkeys={
         'detail': ['eventName', 'requestParameters']
     })

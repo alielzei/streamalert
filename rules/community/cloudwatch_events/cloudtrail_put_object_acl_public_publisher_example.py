@@ -16,7 +16,7 @@ _PUBLIC_ACLS = {
 
 
 @rule(
-    logs=['cloudwatch:events'],
+    logs=['cloudtrail:events'],
     req_subkeys={
         'detail': ['eventName', 'requestParameters', 'sourceIPAddress']
     },
