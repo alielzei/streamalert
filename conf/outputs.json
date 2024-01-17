@@ -12,7 +12,8 @@
     "sample-integration"
   ],
   "aws-sns": {
-    "sample-topic": "sample-topic-name"
+    "sample-topic": "sample-topic-name",
+    "test-email": "streamalert-test-alerts"
   },
   "aws-sqs": {
     "sample-queue": "sample-queue-name"

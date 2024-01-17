@@ -1,7 +1,7 @@
 {
   "account": {
-    "aws_account_id": "AWS_ACCOUNT_ID_GOES_HERE",
-    "prefix": "PREFIX_GOES_HERE",
+    "aws_account_id": "679551966535",
+    "prefix": "ali",
     "region": "us-east-1"
   },
   "general": {
