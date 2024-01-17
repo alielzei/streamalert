@@ -4,7 +4,8 @@ from streamalert.shared.rule import rule
 
 @rule(
     logs=['cloudtrail:events'],
-    req_subkeys={'detail': ['requestParameters', 'eventName']})
+    # req_subkeys={'detail': ['requestParameters', 'eventName']}
+)
 def unencrypted_ami_volume(rec):
     """
     author:       airbnb_csirt
@@ -14,15 +15,15 @@ def unencrypted_ami_volume(rec):
                   (b) Re-create the AMI with encryption enabled
                   (c) Delete the old AMI
     """
-    if rec['detail']['eventName'] != 'CreateImage':
+    if rec['eventName'] != 'CreateImage':
         # check the event type early to avoid unnecessary performance impact
         return False
 
-    if rec['detail']['requestParameters'] is None:
+    if rec['requestParameters'] is None:
         # requestParameters can be defined with a value of null
         return False
 
-    req_params = rec['detail']['requestParameters']
+    req_params = rec['requestParameters']
     block_device_items = req_params.get('blockDeviceMapping', {}).get('items', [])
     if not block_device_items:
         return False
@@ -36,7 +37,8 @@ def unencrypted_ami_volume(rec):
 
 @rule(
     logs=['cloudtrail:events'],
-    req_subkeys={'detail': ['requestParameters', 'eventName']})
+    # req_subkeys={'detail': ['requestParameters', 'eventName']}
+)
 def public_ami(rec):
     """
     author:       airbnb_csirt
@@ -45,15 +47,15 @@ def public_ami(rec):
     playbook:     (a) Reach out to the user who created the volume
                   (b) Set the AMI to private
     """
-    if rec['detail']['eventName'] != 'ModifyImageAttribute':
+    if rec['eventName'] != 'ModifyImageAttribute':
         # check the event type early to avoid unnecessary performance impact
         return False
 
-    if rec['detail']['requestParameters'] is None:
+    if rec['requestParameters'] is None:
         # requestParameters can be defined with a value of null
         return False
 
-    req_params = rec['detail']['requestParameters']
+    req_params = rec['requestParameters']
     permission_items = req_params.get('launchPermission', {}).get('add', {}).get('items', [])
     for item in permission_items:
         if item['group'] == 'all':

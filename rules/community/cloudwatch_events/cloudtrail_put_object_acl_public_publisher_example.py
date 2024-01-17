@@ -17,9 +17,9 @@ _PUBLIC_ACLS = {
 
 @rule(
     logs=['cloudtrail:events'],
-    req_subkeys={
-        'detail': ['eventName', 'requestParameters', 'sourceIPAddress']
-    },
+    # req_subkeys={
+    #     'detail': ['eventName', 'requestParameters', 'sourceIPAddress']
+    # },
     outputs=['slack:sample-channel', 'pagerduty:sample-integration'],
     publishers={
         'slack': [Summary, AttachRuleInfo, AttachFullRecord],
@@ -50,12 +50,12 @@ def cloudtrail_put_object_acl_public_publisher_example(rec, _):
 
     note: This is purely for example purposes in testing, and is not meant to be used as-is
     """
-    if rec['detail']['sourceIPAddress'] != '1.2.3.4':
+    if rec['sourceIPAddress'] != '1.2.3.4':
         return False  # Hack to avoid triggering for other tests events
 
-    request_params = rec['detail']['requestParameters']
+    request_params = rec['requestParameters']
     return (
-        rec['detail']['eventName'] == 'PutObjectAcl' and
+        rec['eventName'] == 'PutObjectAcl' and
         # note: substring is used because it can exist as:
         # "http://acs.amazonaws.com/groups/global/AllUsers" or
         # "uri=http://acs.amazonaws.com/groups/global/AllUsers"

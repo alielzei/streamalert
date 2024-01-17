@@ -1,8 +1,6 @@
 """Alert when resources are made public."""
 import json
 
-from policyuniverse.policy import Policy
-
 from streamalert.shared.rule import rule
 
 @rule(logs=['cloudtrail:events'])
@@ -16,12 +14,16 @@ def cloudtrail_public_resources(rec):
                       (c) determine if the intent is valid, malicious or accidental
     """
     # Check S3
-    if rec['eventName'] == 'PutBucketPolicy':
+    if rec['eventName'] == 'PutBucketPolicy': 
         # S3 doesn't use a policy string, but actual json, unlike all
         # other commands
+        
         policy = rec.get('requestParameters', {}).get('bucketPolicy', None)
         if not policy:
             return False
+
+        from policyuniverse.policy import Policy
+
         policy = Policy(policy)
         if policy.is_internet_accessible():
             return True
@@ -73,6 +75,9 @@ def cloudtrail_public_resources(rec):
     # Check the policy
     if policy_string:
         policy = json.loads(policy_string)
+
+        from policyuniverse.policy import Policy
+
         policy = Policy(policy)
         if policy.is_internet_accessible():
             return True

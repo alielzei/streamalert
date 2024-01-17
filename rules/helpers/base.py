@@ -18,7 +18,7 @@ import logging
 import json
 import random
 import time
-import pathlib2
+
 
 from streamalert.shared.utils import (  # pylint: disable=unused-import
     # Import some utility functions which are useful for rules as well
@@ -50,6 +50,8 @@ def path_matches_any(text, patterns):
     """
     if not isinstance(text, str):
         return False
+
+    import pathlib2
     return any(pathlib2.PurePath(text).match(pattern) for pattern in patterns)
 
 
