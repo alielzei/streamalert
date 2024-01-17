@@ -52,6 +52,7 @@ def generate_rules_engine(config):
     environment = {
         'ALERTS_TABLE': '{}_streamalert_alerts'.format(prefix),
         'STREAMALERT_PREFIX': prefix,
+        'PYTHONPROFILEIMPORTTIME': '1'
     }
 
     if config['lambda']['rules_engine_config'].get('log_rule_statistics'):

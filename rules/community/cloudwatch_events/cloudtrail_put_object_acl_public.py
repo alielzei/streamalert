@@ -13,10 +13,11 @@ _PUBLIC_BUCKETS = {'example-bucket-to-ignore'}
 
 
 @rule(
-    logs=['cloudwatch:events'],
-    req_subkeys={
-        'detail': ['requestParameters']
-    })
+    logs=['cloudtrail:events'],
+    # req_subkeys={
+    #     'detail': ['requestParameters']
+    # }
+)
 def cloudtrail_put_object_acl_public(rec):
     """
     author:         @mimeframe
@@ -27,9 +28,9 @@ def cloudtrail_put_object_acl_public(rec):
     playbook:       (a) Verify if the object should be publicly accessible
                     (b) If not, modify the object ACL
     """
-    request_params = rec['detail']['requestParameters']
+    request_params = rec['requestParameters']
     return (
-        rec['detail']['eventName'] == 'PutObjectAcl' and
+        rec['eventName'] == 'PutObjectAcl' and
         # note: substring is used because it can exist as:
         # "http://acs.amazonaws.com/groups/global/AllUsers" or
         # "uri=http://acs.amazonaws.com/groups/global/AllUsers"
