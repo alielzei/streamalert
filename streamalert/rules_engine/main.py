@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+import cct
+
 import json
 
 from streamalert.rules_engine import RulesEngine
@@ -34,3 +36,5 @@ def handler(event, _):
     except Exception:
         logger.get_logger(__name__).exception('Invocation event: %s', json.dumps(event))
         raise
+
+    cct.dump_stats()
